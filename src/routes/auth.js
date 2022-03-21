@@ -3,7 +3,7 @@ import { handleLogin, handleLogout } from "../controllers/authController.js";
 
 const router = Router();
 
-router.route("/login").post(handleLogin);
-router.route("/logout").post(handleLogout);
+router.post("/login", handleLogin);
+router.post("/logout", handleLogout);
 
-export default router;
+export { router };

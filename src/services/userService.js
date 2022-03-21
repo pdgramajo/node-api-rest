@@ -2,7 +2,7 @@ import User from "../models/User";
 
 const getAll = async () => {
   try {
-    const users = await User.find();
+    const users = await User.getAllActiveUsers();
     return users;
   } catch (error) {
     console.log(error);
@@ -20,19 +20,14 @@ const getById = async (id) => {
 
 const create = async ({ firstName, lastName, phone, email, password }) => {
   try {
-    const foundUser = await User.findOne({
-      email: email,
-      isBloqued: false,
-      isEnabled: true,
-    });
-
+    const foundUser = await User.emailExists(email);
     if (foundUser) throw new Error(409); //Conflict
 
     const data = {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      password: await bcrypt.hash(password, 10),
+      password: password,
       phone: phone,
     };
     const newUser = await User.create(data);

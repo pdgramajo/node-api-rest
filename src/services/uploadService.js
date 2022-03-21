@@ -8,7 +8,6 @@ const fileFilter = (req, file, cb) =>
   cb(null, allowedImagesExts.includes(file.originalname.split(".").pop()));
 
 const storage = multer.diskStorage({ destination, filename });
-// const uploadUsers = multer({ storage, fileFilter })
 
 const upload = multer({ storage, fileFilter }).single("myFile");
 

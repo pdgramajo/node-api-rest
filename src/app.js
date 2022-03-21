@@ -1,11 +1,9 @@
 import express from "express";
 import cors from "cors";
-import UserRoutes from "./routes/user.js";
-import AuthRoutes from "./routes/auth.js";
-import UploadRoutes from "./routes/upload.js";
 import corsOptions from "./config/corsOptions.js";
 import cookieParser from "cookie-parser";
 import credentials from "./middleware/credentials.js";
+import routes from './routes/index.js'
 
 const app = express();
 
@@ -32,8 +30,7 @@ app.get("/", (req, res) => {
   res.send("welcome to my api rest");
 });
 
-app.use("/api/users", UserRoutes);
-app.use("/api/auth", AuthRoutes);
-app.use("/api/upload", UploadRoutes);
+// loading all routes
+app.use('/api', routes)
 
 export default app;
